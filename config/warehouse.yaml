@@ -1,0 +1,31 @@
+# Warehouse Physical Parameters
+# This grid defines the search space for the optimization engine.
+warehouse:
+  rows: 10
+  cols: 10
+  dock_position: [0, 0] # Dock is the origin (0,0); distance is calculated relative to this point.
+  
+
+# Optimization Settings
+# Used by the orchestration layer to select the algorithmic approach.
+optimization:
+  solver_type: "hungarian" # Supported: "hungarian", "milp"
+  objective: "minimize_travel_distance"
+
+# Data Generation Settings
+# We use a Pareto distribution to simulate realistic inventory behavior,
+# where a small set of products (the "vital few") accounts for the 
+# majority of warehouse picking activity.
+simulation:
+  num_products: 100
+  frequency_distribution:
+    type: "pareto"
+    alpha: 2.0 
+    min_picks: 1
+    max_picks: 5000
+
+# Visualization Settings
+visualization:
+  heatmap_colormap: "viridis"
+  save_plots: true
+  output_dir: "reports/figures"
